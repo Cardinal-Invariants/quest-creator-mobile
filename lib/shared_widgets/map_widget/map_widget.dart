@@ -1,85 +1,75 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
-class Marker
-{
-  int id;
-  double Lat;
-  double Long;
-  Marker(int id,double Lat,double Long)
-  {
-    this.id=id;
-    this.Lat=Lat;
-    this.Long=Long;
+import 'package:quest_creator/shared_widgets/map_widget/map_model.dart';
+
+import 'marker_model.dart';
+
+class MapWidget extends StatefulWidget {
+  final MapModel mapModel;
+  final List<Function(Marker)> onTapCallbacks;
+  final String markerImage;
+  final double iconSize;
+
+  MapWidget(this.mapModel,
+      {this.onTapCallbacks = const [],
+      this.markerImage = "marker-15",
+      this.iconSize = 3.0});
+
+  void onMarkerTapped(Symbol symbol) {
+    for (var tapCallback in this.onTapCallbacks) {
+      tapCallback(_convertSymbolToMarker(symbol));
+    }
   }
-  Marker.fromSymbol(Symbol symbol)
-  {
-    this.id=int.parse(symbol.id);
-    this.Lat=symbol.options.geometry.latitude;
-    this.Long=symbol.options.geometry.longitude;
+
+  void moveCamera(MapboxMapController controller, Marker marker, double zoom) {
+    CameraUpdate cameraUpdate =
+        CameraUpdate.newLatLngZoom(LatLng(marker.lat, marker.long), zoom);
+    controller.moveCamera(cameraUpdate);
   }
+
+  Marker _convertSymbolToMarker(Symbol symbol) => Marker(
+      id: int.parse(symbol.id),
+      lat: symbol.options.geometry.latitude,
+      long: symbol.options.geometry.longitude);
+
+  SymbolOptions _getSymbolOptions(Marker marker) => SymbolOptions(
+      geometry: LatLng(marker.lat, marker.long),
+      iconImage: this.markerImage,
+      iconSize: this.iconSize);
+
+  @override
+  _MapWidgetState createState() => _MapWidgetState();
 }
-class MapWidget extends StatelessWidget {
 
-
-  static const String ACCESS_TOKEN = "pk.eyJ1IjoiZHVzaGVzcyIsImEiOiJja2VmcWpneHcwc201MnluNzl3ZDRjNDl1In0.sV8IejZBXjXoUbHgRGeN6w";
-  MapboxMap map;
+class _MapWidgetState extends State<MapWidget> {
+  static const String ACCESS_TOKEN =
+      "pk.eyJ1IjoiZHVzaGVzcyIsImEiOiJja2VmcWpneHcwc201MnluNzl3ZDRjNDl1In0.sV8IejZBXjXoUbHgRGeN6w";
   MapboxMapController controller;
-  Function(Marker) onTapCallback;
 
-  MapWidget([Function(Marker) onTapCallback])
-  {
-    this.onTapCallback=onTapCallback;
-  }
   @override
   Widget build(BuildContext context) {
-
-    this.map= MapboxMap(
+    var map = MapboxMap(
       accessToken: ACCESS_TOKEN,
-      initialCameraPosition:
-      const CameraPosition(target: LatLng(0.0, 0.0)),
-      onMapCreated: onMapCreated,
+      initialCameraPosition: const CameraPosition(target: LatLng(0.0, 0.0)),
+      onMapCreated: (mapController) {
+        mapController.onSymbolTapped.add(widget.onMarkerTapped);
+        setState(() {
+          controller = mapController;
+        });
+      },
     );
-
-    return new Scaffold(
-        body: this.map
-    );
+    onMapUpdated();
+    return new Container(child: map);
   }
 
-  void onMapCreated(MapboxMapController controller) {
-    this.controller = controller;
-    controller.onSymbolTapped.add(onMarkerTap);
-
-  }
-
-  void onMarkerTap(Symbol symbol)
-  {
-    if (this.onTapCallback!=null)
-    {
-    this.onTapCallback( new Marker.fromSymbol(symbol));
+  onMapUpdated() {
+    if (controller != null && widget.mapModel.markers.isNotEmpty) {
+      controller.addSymbols(widget.mapModel.markers
+          .map((m) => widget._getSymbolOptions(m))
+          .toList());
+      widget.moveCamera(controller, widget.mapModel.currentPosition,
+          widget.mapModel.zoomLevel);
     }
-
-  }
-
-  int addMarker(double lat, double long)
-  {
-    this.controller.addSymbol(
-      SymbolOptions(
-          geometry: LatLng(lat, long),
-          iconImage: "marker-15",
-          iconSize: 3
-      ),
-    );
-    return int.parse(this.controller.symbols.last.id)+1;
-  }
-  void removeMarker(int id)
-  {
-    var symbol=this.controller.symbols.where((element) => element.id==id.toString());
-    this.controller.removeSymbol(symbol.first);
-  }
-  void moveCamera(double lat,double long,double zoom)
-  {
-    CameraUpdate cameraUpdate = CameraUpdate.newLatLngZoom(LatLng(lat, long), zoom);
-    this.controller.moveCamera(cameraUpdate);
   }
 }
