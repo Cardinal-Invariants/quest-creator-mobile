@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quest_creator/shared_widgets/bottom_nav_bar.dart';
 
 class CreateQuestScreen extends StatefulWidget {
   @override
@@ -9,8 +8,6 @@ class CreateQuestScreen extends StatefulWidget {
 class _CreateQuestScreenState extends State<CreateQuestScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavBar(),
-    );
+    return Container();
   }
 }
