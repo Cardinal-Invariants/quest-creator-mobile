@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
-
 class MapWidget extends StatelessWidget {
 
 
@@ -47,8 +46,11 @@ class MapWidget extends StatelessWidget {
       ),
     );
     return int.parse(this.controller.symbols.last.id)+1;
-
-
+  }
+  void RemoveMarker(int id)
+  {
+    var symbol=this.controller.symbols.where((element) => element.id==id.toString());
+    this.controller.removeSymbol(symbol.first);
   }
   void MoveCamera(double lat,double long,double zoom)
   {
