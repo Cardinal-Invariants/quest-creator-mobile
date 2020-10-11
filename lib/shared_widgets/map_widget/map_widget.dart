@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
-import 'dart:developer' as developer;
-import 'dart:async';
-import 'package:flutter/services.dart';
-import 'dart:typed_data';
-import 'package:http/http.dart';
+
 
 class MapWidget extends StatelessWidget {
 
@@ -28,6 +24,7 @@ class MapWidget extends StatelessWidget {
       const CameraPosition(target: LatLng(0.0, 0.0)),
       onMapCreated: onMapCreated,
     );
+
     return new Scaffold(
         body: this.map
     );
@@ -36,6 +33,7 @@ class MapWidget extends StatelessWidget {
   void onMapCreated(MapboxMapController controller) {
     this.controller = controller;
     controller.onSymbolTapped.add(onTapCallback);
+
   }
 
 
@@ -52,7 +50,7 @@ class MapWidget extends StatelessWidget {
 
 
   }
-  void MoveMap(double lat,double long,double zoom)
+  void MoveCamera(double lat,double long,double zoom)
   {
     CameraUpdate cameraUpdate = CameraUpdate.newLatLngZoom(LatLng(lat, long), zoom);
     this.controller.moveCamera(cameraUpdate);
