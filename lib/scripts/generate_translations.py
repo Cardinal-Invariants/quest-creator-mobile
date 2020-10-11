@@ -75,7 +75,7 @@ if __name__ == '__main__':
     if basename(normpath(os.getcwd())) != 'lib':
         raise Exception('Script should be executed from the lib folder')
     args = parser.parse_args()
-    packages = ['screens', 'shared_widgets']
+    packages = ['pages', 'shared_widgets']
     for package in packages:
         mode = list(filter(lambda key: vars(args)[key], vars(args).keys()))[0]
         execute(package, 'a2m')
