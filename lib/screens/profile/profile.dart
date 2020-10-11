@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:quest_creator/shared_widgets/bottom_nav_bar.dart';
 
-class Profile extends StatefulWidget {
+class ProfileScreen extends StatefulWidget {
   @override
-  _ProfileState createState() => _ProfileState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      bottomNavigationBar: BottomNavBar(),
+    );
   }
 }

@@ -27,7 +27,7 @@ class QuestCreator extends StatelessWidget {
         primaryColor: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: HomeScreen(),
     );
   }
 }

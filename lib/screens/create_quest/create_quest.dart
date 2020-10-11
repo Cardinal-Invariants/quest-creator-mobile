@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:quest_creator/shared_widgets/bottom_nav_bar.dart';
 
-class CreateQuest extends StatefulWidget {
+class CreateQuestScreen extends StatefulWidget {
   @override
-  _CreateQuestState createState() => _CreateQuestState();
+  _CreateQuestScreenState createState() => _CreateQuestScreenState();
 }
 
-class _CreateQuestState extends State<CreateQuest> {
+class _CreateQuestScreenState extends State<CreateQuestScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      bottomNavigationBar: BottomNavBar(),
+    );
   }
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:quest_creator/screens/create_quest/create_quest.dart';
+import 'package:quest_creator/screens/settings/settings.dart';
+import 'package:quest_creator/screens/home_screen/home_screen.dart';
+import 'package:quest_creator/screens/profile/profile.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -7,7 +11,14 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 0;
+  static int _selectedIndex = 0;
+
+  static List<Widget> _widgetRoutes = <Widget>[
+    HomeScreen(),
+    CreateQuestScreen(),
+    SettingsScreen(),
+    ProfileScreen()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +69,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 setState(() {
                   _selectedIndex = index;
                 });
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => _widgetRoutes[index]),
+                );
               }),
         ),
       ),
