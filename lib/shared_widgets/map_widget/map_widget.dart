@@ -1,16 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
-
+class Marker
+{
+  int id;
+  double Lat;
+  double Long;
+  Marker(int id,double Lat,double Long)
+  {
+    this.id=id;
+    this.Lat=Lat;
+    this.Long=Long;
+  }
+  Marker.fromSymbol(Symbol symbol)
+  {
+    this.id=int.parse(symbol.id);
+    this.Lat=symbol.options.geometry.latitude;
+    this.Long=symbol.options.geometry.longitude;
+  }
+}
 class MapWidget extends StatelessWidget {
 
 
   static const String ACCESS_TOKEN = "pk.eyJ1IjoiZHVzaGVzcyIsImEiOiJja2VmcWpneHcwc201MnluNzl3ZDRjNDl1In0.sV8IejZBXjXoUbHgRGeN6w";
   MapboxMap map;
   MapboxMapController controller;
-  Function(Symbol) onTapCallback;
+  Function(Marker) onTapCallback;
 
-  MapWidget([Function(Symbol) onTapCallback])
+  MapWidget([Function(Marker) onTapCallback])
   {
     this.onTapCallback=onTapCallback;
   }
@@ -31,12 +48,20 @@ class MapWidget extends StatelessWidget {
 
   void onMapCreated(MapboxMapController controller) {
     this.controller = controller;
-    controller.onSymbolTapped.add(onTapCallback);
+    controller.onSymbolTapped.add(onMarkerTap);
 
   }
 
+  void onMarkerTap(Symbol symbol)
+  {
+    if (this.onTapCallback!=null)
+    {
+    this.onTapCallback( new Marker.fromSymbol(symbol));
+    }
 
-  int AddMarker(double lat, double long)
+  }
+
+  int addMarker(double lat, double long)
   {
     this.controller.addSymbol(
       SymbolOptions(
@@ -47,12 +72,12 @@ class MapWidget extends StatelessWidget {
     );
     return int.parse(this.controller.symbols.last.id)+1;
   }
-  void RemoveMarker(int id)
+  void removeMarker(int id)
   {
     var symbol=this.controller.symbols.where((element) => element.id==id.toString());
     this.controller.removeSymbol(symbol.first);
   }
-  void MoveCamera(double lat,double long,double zoom)
+  void moveCamera(double lat,double long,double zoom)
   {
     CameraUpdate cameraUpdate = CameraUpdate.newLatLngZoom(LatLng(lat, long), zoom);
     this.controller.moveCamera(cameraUpdate);
