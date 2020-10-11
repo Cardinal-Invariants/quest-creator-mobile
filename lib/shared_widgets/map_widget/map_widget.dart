@@ -15,22 +15,18 @@ class MapWidget extends StatelessWidget {
   MapboxMapController controller;
   Function(Symbol) onTapCallback;
 
-
   MapWidget([Function(Symbol) onTapCallback])
   {
     this.onTapCallback=onTapCallback;
   }
-
   @override
   Widget build(BuildContext context) {
 
-    map= MapboxMap(
-
+    this.map= MapboxMap(
       accessToken: ACCESS_TOKEN,
       initialCameraPosition:
       const CameraPosition(target: LatLng(0.0, 0.0)),
       onMapCreated: onMapCreated,
-
     );
     return new Scaffold(
         body: this.map
@@ -45,7 +41,6 @@ class MapWidget extends StatelessWidget {
 
   int AddMarker(double lat, double long)
   {
-
     this.controller.addSymbol(
       SymbolOptions(
           geometry: LatLng(lat, long),
@@ -53,7 +48,6 @@ class MapWidget extends StatelessWidget {
           iconSize: 3
       ),
     );
-
     return int.parse(this.controller.symbols.last.id)+1;
 
 
