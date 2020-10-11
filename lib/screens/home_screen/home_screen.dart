@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quest_creator/shared_widgets/bottom_drawer_container.dart';
 import 'package:quest_creator/shared_widgets/map_widget/map_widget.dart';
-import 'package:quest_creator/shared_widgets/bottom_nav_bar.dart';
 
-class HomePage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _HomePageState();
+  State<StatefulWidget> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   bool isMenuVisible = false;
   final showMenuOffset = 10;
+  final navigatorKey = GlobalKey<NavigatorState>();
 
   void handlePanUpdate(DragUpdateDetails details) {
     if (details.delta.dy.abs() > showMenuOffset) {
@@ -24,9 +24,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        bottomNavigationBar: BottomNavBar(),
-        body: GestureDetector(
+    return Container(
+        child: GestureDetector(
             behavior: HitTestBehavior.translucent,
             onPanUpdate: this.handlePanUpdate,
             child: Stack(children: [
