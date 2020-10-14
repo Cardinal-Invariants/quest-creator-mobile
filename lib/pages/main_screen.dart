@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:quest_creator/screens/profile/profile.dart';
-import 'package:quest_creator/screens/settings/settings.dart';
+import 'package:quest_creator/pages/profile/profile.dart';
+import 'package:quest_creator/pages/settings/settings.dart';
 import 'package:quest_creator/shared_widgets/bottom_nav_bar_routing.dart';
 import 'create_quest/create_quest.dart';
-import 'home_screen/home_screen.dart';
-
+import 'home_page/home_page.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -81,17 +80,12 @@ class _MainScreenState extends State<MainScreen> {
         selectedIndex: _selectedIndex,
         navigatorKeys: _navigatorKeys,
         childrens: [
-          HomeScreen(),
-          CreateQuestScreen(),
-          SettingsScreen(),
-          ProfileScreen()
+          HomePage(),
+          CreateQuestPage(),
+          SettingsPage(),
+          ProfilePage()
         ],
       ),
-
     );
-
   }
-
-
-
 }

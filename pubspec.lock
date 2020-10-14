@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.39.17"
+  archive:
+    dependency: transitive
+    description:
+      name: archive
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.13"
   args:
     dependency: transitive
     description:
@@ -128,6 +135,11 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   glob:
     dependency: transitive
     description:
@@ -149,6 +161,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.14.0+4"
+  http:
+    dependency: "direct main"
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.12.2"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.4"
+  image:
+    dependency: transitive
+    description:
+      name: image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.18"
   intl:
     dependency: "direct main"
     description:
@@ -170,6 +203,34 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.2"
+  mapbox_gl:
+    dependency: "direct main"
+    description:
+      name: mapbox_gl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.0"
+  mapbox_gl_dart:
+    dependency: transitive
+    description:
+      name: mapbox_gl_dart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.5"
+  mapbox_gl_platform_interface:
+    dependency: transitive
+    description:
+      name: mapbox_gl_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.0"
+  mapbox_gl_web:
+    dependency: transitive
+    description:
+      name: mapbox_gl_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.0"
   matcher:
     dependency: transitive
     description:
@@ -226,6 +287,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  provider:
+    dependency: "direct main"
+    description:
+      name: provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.0"
   pub_semver:
     dependency: transitive
     description:
@@ -301,6 +369,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.7+15"
+  xml:
+    dependency: transitive
+    description:
+      name: xml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.5.1"
   yaml:
     dependency: transitive
     description:
@@ -310,3 +385,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.10.0-110 <2.11.0"
+  flutter: ">=1.12.13+hotfix.4 <2.0.0"
