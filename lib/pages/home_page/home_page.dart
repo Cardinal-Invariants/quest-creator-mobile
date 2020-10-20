@@ -19,8 +19,6 @@ class HomePage extends StatelessWidget {
           Container(
             alignment: Alignment.bottomCenter,
             margin: EdgeInsets.only(bottom: 60),
-            // margin: margin: EdgeInsets.only(top: 150),
-            // padding: EdgeInsets.only(bottom: 150),
             child: IconButton(
               onPressed: null,
               icon: Icon(Icons.arrow_upward_outlined),
@@ -35,15 +33,12 @@ class HomePage extends StatelessWidget {
               content: Container(
                 margin: EdgeInsets.only(bottom: 70, left: 15, right: 15),
                 child: Column(children: [
-                  Container(
-                    // margin: EdgeInsets.only(top: 130),
-                    child: Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 5.0, color: Colors.amber),
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.grey),
-                      ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 5.0, color: Colors.amber),
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.grey),
                     ),
                   )
                 ]),
