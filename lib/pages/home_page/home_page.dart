@@ -7,6 +7,7 @@ import 'package:quest_creator/shared_widgets/map_widget/map_widget.dart';
 
 class HomePage extends StatelessWidget {
   final bool isMenuVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -15,14 +16,38 @@ class HomePage extends StatelessWidget {
           Consumer<MapModel>(builder: (context, mapModel, child) {
             return MapWidget(mapModel);
           }),
+          Container(
+            alignment: Alignment.bottomCenter,
+            margin: EdgeInsets.only(bottom: 60),
+            // margin: margin: EdgeInsets.only(top: 150),
+            // padding: EdgeInsets.only(bottom: 150),
+            child: IconButton(
+              onPressed: null,
+              icon: Icon(Icons.arrow_upward_outlined),
+              iconSize: 30,
+            ),
+          ),
           BottomDrawerContainer(
               animationDuration: Duration(milliseconds: 600),
               isVisible: isMenuVisible,
               visibleScreenFactor: 0.8,
               hiddenScreenFactor: 0.05,
               content: Container(
-                color: Colors.blueGrey[50],
-              )),
+                margin: EdgeInsets.only(bottom: 70, left: 15, right: 15),
+                child: Column(children: [
+                  Container(
+                    // margin: EdgeInsets.only(top: 130),
+                    child: Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 5.0, color: Colors.amber),
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.grey),
+                      ),
+                    ),
+                  )
+                ]),
+              ))
         ]));
   }
 }

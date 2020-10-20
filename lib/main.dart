@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:quest_creator/pages/home_page/home_page.localizations.dart';
 import 'package:quest_creator/pages/main_screen.dart';
@@ -14,6 +15,7 @@ class QuestCreator extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       locale:
