@@ -15,7 +15,7 @@ class BottomDrawerContainer extends StatefulWidget {
       this.content,
       this.isVisible,
       this.visibleScreenFactor = 0.8,
-      this.hiddenScreenFactor = 0.1,
+      this.hiddenScreenFactor = 10,
       this.animationDuration})
       : super(key: key);
   @override
@@ -52,6 +52,7 @@ class _BottomDrawerContainerState extends State<BottomDrawerContainer> {
               borderRadius: BorderRadius.only(
                   topLeft: borderRadius, topRight: borderRadius),
               child: Container(
+                margin: EdgeInsets.only(top: 150),
                 child: widget.content,
                 width: SizeConfig.screenWidth,
                 height: drawerHeight,

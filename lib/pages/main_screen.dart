@@ -24,15 +24,17 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      extendBody: true,
       bottomNavigationBar: Container(
-        margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10),
+        margin: const EdgeInsets.only(bottom: 0, right: 0, left: 0),
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
                 colors: [Colors.amber[700], Colors.amberAccent]),
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.elliptical(25, 30),
+                topRight: Radius.elliptical(25, 30)),
             boxShadow: [
               BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
             ]),
@@ -76,6 +78,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
       ),
+      backgroundColor: Colors.grey,
       body: BottomNavBarRouting(
         selectedIndex: _selectedIndex,
         navigatorKeys: _navigatorKeys,
